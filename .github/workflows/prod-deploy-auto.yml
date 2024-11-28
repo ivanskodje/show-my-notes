@@ -1,0 +1,97 @@
+name: "PROD: Auto build and push docker image"
+on:
+  push:
+    paths-ignore:
+      - "node_modules/**/*"
+      - ".next/**/*"
+      - "**/*.env"
+      - "**/package.json"
+      - "**/*.log"
+      - "coverage/**/*"
+      - "dist/**/*"
+      - "**/*.DS_Store"
+      - "tmp/**/*"
+      - "temp/**/*"
+      - ".cache/**/*"
+      - "**/*.tar.gz"
+      - ".vscode/**/*"
+      - "**/*.swp"
+      - "**/*~"
+      - "**/*.lock"
+      - "**/*.md"
+      - "**/*.mdx"
+    branches: ["master"]
+
+jobs:
+  build:
+    name: Build & push docker image
+    runs-on: ubuntu-latest
+    env:
+      TAG: "master"
+      REGISTRY: "ghcr.io"
+      REPOSITORY_OWNER: "${{ github.repository_owner }}"
+      IMG_NAME: "show-my-notes"
+      PUSH_CONDITION: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create and pass GITHUB_DATETIME to ENV
+        run: echo "GITHUB_DATETIME=$(date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+
+      - name: Docker metadata
+        id: metadata
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER }}/${{ env.IMG_NAME }}
+          tags: |
+            type=raw,value=${{ env.TAG }}
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY}}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ env.PUSH_CONDITION }}
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+          build-args: |
+            GITHUB_SHA=${{ github.sha }}
+            GITHUB_DATETIME=${{ env.GITHUB_DATETIME }}
+            APP_NAME=${{ vars.APP_NAME }}
+            APP_DESCRIPTION=${{ vars.APP_DESCRIPTION }}
+            GITHUB_REPO_OWNER=${{ vars.PROD_GITHUB_REPO_OWNER }}
+            GITHUB_REPO_NAME=${{ vars.PROD_GITHUB_REPO_NAME }}
+            GITHUB_BRANCH=${{ vars.PROD_GITHUB_BRANCH }}
+            GITHUB_FOLDER_PATH=${{ vars.PROD_GITHUB_FOLDER_PATH }}
+            GITHUB_PRIVATE_ACCESS_TOKEN=${{ secrets.PROD_GITHUB_PRIVATE_ACCESS_TOKEN }}
+
+      - name: Trigger deployment webhook!
+        run: |
+          IS_FAILED_DEPLOY=1
+          for i in {1..10}; do
+            echo "Attempt $i to trigger deployment webhook..."
+            curl -X POST -H "Content-Type: application/json" \
+              -H "X-Hub-Signature: ${{ secrets.PROD_WEBHOOK_DEPLOY_SECRET }}" \
+              -d '{"event": "redeploy"}' \
+              ${{ vars.PROD_WEBHOOK_DEPLOY_URL }}
+            CURL_EXIT_CODE=$?
+            if [ $CURL_EXIT_CODE -eq 0 ]; then
+              echo "Deployment webhook triggered successfully."
+              IS_FAILED_DEPLOY=0
+              break
+            fi
+            echo "Failed attempt $i, retrying in 5 seconds..."
+            sleep 5
+          done
+
+          if [ $IS_FAILED_DEPLOY -ne 0 ]; then
+            echo "Failed to trigger deployment webhook after 10 attempts."
+            exit 1
+          fi

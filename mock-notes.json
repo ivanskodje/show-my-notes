@@ -1,0 +1,262 @@
+[
+  {
+    "id": "$ Husky.md",
+    "title": "Husky",
+    "slug": "husky",
+    "excerpt": "Husky: Automate Git hooks to enforce code linting, commit message standards, and branch restrictions.",
+    "tags": ["Git", "Husky"],
+    "createdAt": "2024-11-12T20:13:39.247Z",
+    "updatedAt": "2024-11-12T20:13:39.247Z",
+    "content": "\n# Husky\n\n## Index\n\n- [Install Husky](<./Husky - Install Husky.md>)\n- [Automatically Lint Code with pretty-quick and Husky](<./Husky - Automatically Lint Code with pretty-quick and Husky.md>)\n- [Automatically Lint Commit Messages with commit-msg and Husky](<./Husky - Automatically Lint Commit Messages with commit-msg and Husky.md>)\n- [Prevent Push Directly to Master or Main with Husky](<./Husky - Prevent push directly to master or main with Husky.md>)\n\n## References\n\n- [Official Husky Page](https://typicode.github.io/husky/)\n"
+  },
+  {
+    "id": "$ Nextjs.md",
+    "title": "Next.js",
+    "slug": "nextjs",
+    "excerpt": "Next.js: A React framework by Vercel, enabling fast, SEO-friendly, and scalable web apps with hybrid rendering.",
+    "tags": ["React", "Nextjs", "index"],
+    "createdAt": "2024-11-12T20:13:39.393Z",
+    "updatedAt": "2024-11-12T20:13:39.393Z",
+    "content": "\n# Next.js\n\nNext.js is a React-based framework developed by Vercel, designed to provide a powerful and flexible solution for building optimized, production-ready web applications.\n\nIt offers features like server-side rendering (SSR), static site generation (SSG), automatic code splitting, and API routes, making it ideal for creating fast, SEO-friendly, and scalable web applications.\n\nOne of the standout features of Next.js is its hybrid rendering capabilities, allowing developers to choose between static and server-rendered content based on the specific needs of each page. Additionally, Next.js includes built-in optimizations like image handling, prefetching, and route-based code splitting, which can significantly enhance performance.\n\n## Index\n\n- [How to Use generateStaticParams in Next.js for Faster Page Loading](<./Nextjs - How to use generateStaticParams in nextjs for faster page loading.md>)\n- [Optimize Image Loading in Next.js](<./Nextjs - Optimize Image Loading in Next.js.md>)\n- [Prefetching Routes in Next.js](<./Nextjs - Prefetching Routes in Next.js.md>)\n- [What Are the Best Techniques to Improve Next.js Performance?](<./Nextjs - What are the best techniques to improve nextjs performance.md>)\n- [React Strict Mode in Next.js](<./Nextjs - React Strict Mode in Nextjs.md>)\n- [How to Create a New Next.js Project](<./Nextjs - How to create a new Next.js 15 Project.md>)\n\n## References\n\n- [Nextjs.org](https://nextjs.org/)\n"
+  },
+  {
+    "id": "$ React Query.md",
+    "title": "React Query",
+    "slug": "react-query",
+    "excerpt": "React Query simplifies async state in React, handling caching, updates, and errors for server-state data.",
+    "tags": ["React", "react-query", "index"],
+    "createdAt": "2024-11-12T20:13:39.423Z",
+    "updatedAt": "2024-11-12T20:13:39.423Z",
+    "content": "\n# React Query\n\nReact Query is a powerful library for managing asynchronous state in React applications, focusing on server-state data fetching and caching. It takes care of complex logic that’s often tricky to implement manually, such as caching, background updates, and error handling. By managing these concerns, React Query improves user experience and can reduce the load on APIs.\n\n> \"Data Fetching is simple.\n> Async State Management is not.\"\n> - [TkDodo](https://tkdodo.eu/blog/why-you-want-react-query)\n\n---\n\n## Index\n\n### Getting Started\n\n- [Why Use React Query?](<./React Query - Why use React Query.md>)\n- [Core Concepts of React Query](<./React Query - Core Concepts of React Query.md>)\n- [Key Terminology in React Query](<./React Query - Key Terminology in React Query.md>)\n\n### Usage Guidelines\n\n- [When to Use React Query](<./React Query - When to use React Query.md>)\n- [When Not to Use React Query](<./React Query - When Not to use React Query.md>)\n- [Client-Side Only: React Query and \"use client\"](<./React Query - Client Side Only React Query and use client.md>)\n\n### Data Handling and Caching Strategies\n\n- [Global Caching and Initial Data Patterns in React Query](<./React Query - Global Caching and Initial Data Patterns in React Query.md>)\n- [React Query vs. Traditional Data Fetching](<./React Query - React Query vs Traditional Data Fetching.md>)\n\n### Best Practices and Advanced Patterns\n\n- [React Query Common Patterns and Best Practices](<./React Query - React Query Common Patterns and Best Practices.md>)\n- [Difference Between Tanstack react-query and react-query](<./React Query - Difference Between Tanstack react--query and react-query.md>)\n\n---\n\n## References\n\n- [Why You Need React Query](https://tkdodo.eu/blog/why-you-want-react-query) by TkDodo\n- [React Query - Complete Tutorial](https://www.youtube.com/watch?v=8K1N3fE-cDs) by Cosden Solutions\n- [React Query Is (Still) Essential - My Favorite React Library](https://www.youtube.com/watch?v=vxkbf5QMA2g) by Theo\n"
+  },
+  {
+    "id": "GitHub - GitHub SSH Authentication Troubleshooting.md",
+    "title": "GitHub SSH Authentication Troubleshooting",
+    "slug": "github-ssh-authentication-troubleshooting",
+    "excerpt": "Troubleshoot GitHub SSH: Verify user with `ssh -T`, check SSH config, update git remote if needed.",
+    "tags": ["GitHub"],
+    "createdAt": "2024-11-12T20:13:39.424Z",
+    "updatedAt": "2024-11-12T20:13:39.424Z",
+    "content": "\n# GitHub SSH Authentication Troubleshooting\n\n## Issue\n\n`Repository not found` or wrong GitHub user when pushing.\n\n## Steps\n\n1. **Check SSH Authentication**\n   - Run: `ssh -T git@github.com`\n   - Confirm it returns the correct user (e.g., `Hi <YourName>!`).\n\n2. **Verify SSH Config in `~/.ssh/config`**\n   - Check for your GitHub setup and SSH key:\n\n```plaintext\n Host github.com-<YourAlias>\n   HostName github.com\n   User git\n   IdentityFile ~/.ssh/<your_key_file>\n   IdentitiesOnly yes\n```\n\n   - Use a unique `Host` alias, like `github.com-<YourAlias>`, for each GitHub account.\n\n3. **Update Git Remote to Match Alias**\n   - Confirm `git remote -v` shows the correct URL.\n   - If using an alias, update the remote to match:\n\n```bash\ngit remote set-url origin git@github.com-<YourAlias>:<YourName>/<repo>.git\n```\n\n4. **Test Push**\n   - Run: `git push -u origin <branch>` to confirm successful authentication.\n\n## Notes\n\n- Ensure the SSH key has access to the repo if it’s private.\n- The `Host` alias in `~/.ssh/config` should match the Git remote URL if used.\n"
+  },
+  {
+    "id": "Husky - Automatically Lint Code with pretty-quick and Husky.md",
+    "title": "Automatically Lint Code with `pretty-quick` and Husky",
+    "slug": "automatically-lint-code-with-pretty-quick-and-husky",
+    "excerpt": "Auto-lint with Husky: Use `pretty-quick` to run Prettier on staged files before committing.",
+    "tags": ["Git", "Husky"],
+    "createdAt": "2024-11-12T20:13:39.456Z",
+    "updatedAt": "2024-11-12T20:13:39.456Z",
+    "content": "\n# Automatically Lint Code with `pretty-quick` and Husky\n\nTo run Prettier on staged files automatically before committing:\n\n1. **Install pretty-quick**: `yarn add --dev prettier pretty-quick`\n2. **Create a Pre-commit Hook**: Add the following in a new file `.husky/pre-commit`:\n\n```sh\n#!/usr/bin/env sh\nnpx pretty-quick --staged\n``` \n\n## References\n\n- [pretty-quick on GitHub](https://github.com/prettier/pretty-quick)\n"
+  },
+  {
+    "id": "Husky - Automatically Lint Commit Messages with commit-msg and Husky.md",
+    "title": "Automatically Lint Commit Messages with `commit-msg` and Husky",
+    "slug": "automatically-lint-commit-messages-with-commit-msg-and-husky",
+    "excerpt": "Enforce commit standards: Use `commit-msg` hook with Husky and commitlint for consistent messages.",
+    "tags": ["Git", "Husky"],
+    "createdAt": "2024-11-12T20:13:39.456Z",
+    "updatedAt": "2024-11-12T20:13:39.456Z",
+    "content": "\n# Automatically Lint Commit Messages with `commit-msg` and Husky\n\nTo enforce commit message standards with Husky and commitlint:\n\n1. **Install commitlint**: `yarn add --dev @commitlint/{cli,config-conventional}`\n2. **Setup conventional commit config**: `echo \"export default { extends: ['@commitlint/config-conventional'] };\" > commitlint.config.ts`\n3. **Create a Commit Message Hook**: Add the following in a new file `.husky/commit-msg`:\n\n```sh\n#!/usr/bin/env sh\nnpx commitlint --edit $1\n```\n\n## References\n\n- [commitlint.js.org](https://commitlint.js.org)\n- [Conventional Commits](https://www.conventionalcommits.org/): Learn about the conventional commit specification\n"
+  },
+  {
+    "id": "Husky - Install Husky.md",
+    "title": "Install Husky",
+    "slug": "install-husky",
+    "excerpt": "Automate Git hooks: Install Husky to set up hooks for linting, testing, and more on commits.",
+    "tags": ["Git", "Husky"],
+    "createdAt": "2024-11-12T20:13:39.477Z",
+    "updatedAt": "2024-11-12T20:13:39.477Z",
+    "content": "\n# Install Husky\n\nHusky allows you to set up Git hooks, ideal for automating tasks like linting commit messages, code, and tests.\n\n1. **Install Husky**: `yarn add husky --dev`\n2. **Initialize Husky**: `npx husky init`\n\n## References\n\n- [Official Husky Page](https://typicode.github.io/husky/)\n"
+  },
+  {
+    "id": "Husky - Prevent push directly to master or main with Husky.md",
+    "title": "Prevent Push Directly to Master or Main with Husky",
+    "slug": "prevent-push-directly-to-master-or-main-with-husky",
+    "excerpt": "Block direct pushes to master/main: Use Husky pre-push hook to enforce pull requests.",
+    "tags": ["Git", "Husky"],
+    "createdAt": "2024-11-12T20:13:39.514Z",
+    "updatedAt": "2024-11-12T20:13:39.514Z",
+    "content": "\n# Prevent Push Directly to Master or Main with Husky\n\n**Create a Pre-Push Hook:** Add the following in a new file `./husky/pre-push`:\n\n```sh\nbranch=\\$(git symbolic-ref HEAD | sed -e 's,.*/\\\\(.*\\\\),\\\\1,')\nif [ \"\\$branch\" = \"master\" ] || [ \"\\$branch\" = \"main\" ]; then\n  echo \"You can't push directly to master or main branch. Please create a pull request.\"\n  exit 1\nfi\n```\n"
+  },
+  {
+    "id": "Nextjs - How to create a new Next.js 15 Project.md",
+    "title": "How to Create a New Next.js Project",
+    "slug": "how-to-create-a-new-nextjs-15-project",
+    "excerpt": "Start a Next.js project: Run `npx create-next-app@latest` in terminal, then install dependencies.",
+    "tags": ["React", "Nextjs"],
+    "createdAt": "2024-11-12T20:13:39.521Z",
+    "updatedAt": "2024-11-12T20:13:39.521Z",
+    "content": "\n# How to Create a New Next.js Project\n\n1. Open your terminal and navigate to the desired project directory.\n2. Run: `npx create-next-app@latest .`\n   ![](<../__data/attachments/How to create a new Next.js 15 Project - npx create-next-app.png>)\n3. Run `yarn` (or use your package manager of choice) to install dependencies.\n4. Start the development server: `yarn dev`.\n\n# References\n\n- [Next.js Installation Guide](https://nextjs.org/docs/getting-started/installation)\n"
+  },
+  {
+    "id": "Nextjs - How to use generateStaticParams in nextjs for faster page loading.md",
+    "title": "How to Use `generateStaticParams` in Next.js for Faster Page Loading",
+    "slug": "how-to-use-generateStaticParams-in-nextjs-for-faster-page-loading",
+    "excerpt": "Optimize Next.js with `generateStaticParams`: Pre-build dynamic pages for faster load times.",
+    "tags": ["React", "Nextjs", "Optimization"],
+    "createdAt": "2024-11-12T20:13:39.512Z",
+    "updatedAt": "2024-11-12T20:13:39.512Z",
+    "content": "\n# How to Use `generateStaticParams` in Next.js for Faster Page Loading\n\n## Using `generateStaticParams()` in Next.js\n\n`generateStaticParams()` runs at build time to return a list of parameters for dynamic routes. This is ideal for generating many static pages, like `/items/[slug]`, where each `slug` uniquely identifies an item.\n\nIn this example, we use a Drizzle database to fetch slugs for each item in `itemCollections`.\n\n```tsx\nexport async function generateStaticParams() {\n  return await db.select({ item: item.slug }).from(itemCollections);\n}\n\nexport default async function HomePage(props: { params: { item: string; } }) {\n        const { item } = props.params;\n        // Rest of HomePage logic here\n}\n```\n\nThis approach tells Next.js to build a static page for each `slug` in `/items/[slug]`. Since the pages are pre-built, they load instantly without server processing.\n\n## Benefits\n\n- **Faster Load Times**: Pages are pre-built and served immediately.\n- **Server-Free**: No runtime server work; pages are ready at build.\n\n## References\n\n- [generateStaticParams docs](https://nextjs.org/docs/app/api-reference/functions/generate-static-params)\n"
+  },
+  {
+    "id": "Nextjs - Optimize Image Loading in Next.js.md",
+    "title": "Optimize Image Loading in Next.js",
+    "slug": "optimize-image-loading-in-nextjs",
+    "excerpt": "Optimize Next.js image loading: use `eager` and `lazy` loading, `decoding=\"sync\"`, `quality`, and `priority`.",
+    "tags": ["React", "Nextjs", "Optimization"],
+    "createdAt": "2024-11-12T20:13:39.519Z",
+    "updatedAt": "2024-11-12T20:13:39.519Z",
+    "content": "\n# Optimize Image Loading in Next.js\n\nOptimized image loading can significantly enhance your application’s performance, especially when dealing with multiple or large images. Below are some techniques tailored to small/medium and large images.\n\n## For Small/Medium-Sized Images\n\nUse these settings for thumbnails or smaller images where loading speed is prioritized.\n\n```tsx\nexport default async function HomePage() {\n  let imageCount = 0;\n\n  return (\n    // Assuming a loop here for listing products with images\n    <Image\n      loading={imageCount++ < 15 ? \"eager\" : \"lazy\"}\n      decoding=\"sync\"\n      quality={65}\n      ...\n    />\n  );\n}\n\n```\n\n**Note**: These tricks apply only to server components.\n\n#### `loading`\n\nThe `loading` attribute determines the loading strategy:\n\n- Setting `loading=\"eager\"` for the first N (in our case 15) images prioritizes their loading, ensuring they’re displayed quickly when the page loads. This is ideal on pages with a unspecific number of pictures, such as on a product collection page.\n- For pages with fewer fixed images, we set `loading=\"eager\"` on all of them.\n- Subsequent images are loaded lazily, improving page load time by deferring non-essential image loads.\n\n[Learn more about loading options in the Next.js documentation](https://nextjs.org/docs/pages/api-reference/components/image#loading).\n\n#### `decoding=\"sync\"`\n\nSetting `decoding=\"sync\"` instructs the browser to decode the image immediately, before rendering other content. This ensures that essential images (like thumbnails) appear as soon as possible, enhancing the visual loading experience. This is beneficial for small, simple images that don’t strain the browser’s decoding resources.\n\n[Learn more about decoding options in the Next.js documentation](https://nextjs.org/docs/pages/api-reference/components/image#decoding).\n\n#### `quality`\n\nAdjusting `quality` allows for fine-tuning image file size:\n\n- `quality={65}` reduces the image’s file size, balancing clarity with faster load times, particularly suitable for thumbnails.\n- The `quality` prop accepts values from 1 to 100, with lower values indicating higher compression.\n\n[Learn more about quality options in the Next.js documentation](https://nextjs.org/docs/pages/api-reference/components/image#quality).\n\n## For Large Images\n\nFor larger, high-resolution images, consider setting the `priority` attribute to ensure they load immediately. This is ideal for hero images or other prominently displayed content.\n\n```tsx\n<Image\n    priority\n    ...\n/>\n```\n\n> **Note**: `priority` cannot be used with `loading`.\n\n#### `priority`\n\nSetting `priority` disables lazy loading, giving the image immediate load priority. This is recommended for essential, large images that significantly impact the page's visual hierarchy.\n\n[Learn more about priority options in the Next.js documentation](https://nextjs.org/docs/pages/api-reference/components/image#priority).\n"
+  },
+  {
+    "id": "Nextjs - Prefetching Routes in Next.js.md",
+    "title": "Prefetching Routes in Next.js",
+    "slug": "prefetching-routes-in-nextjs",
+    "excerpt": "Enable fast Next.js navigation with `prefetch` in `<Link>` and `useRouter`, loading routes in the background.",
+    "tags": ["React", "Nextjs", "Optimization"],
+    "createdAt": "2024-11-12T20:13:39.529Z",
+    "updatedAt": "2024-11-12T20:13:39.529Z",
+    "content": "\n# Prefetching Routes in Next.js\n\nAn overview of Next.js's prefetching capabilities is available [here](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#2-prefetching). This includes prefetching with the `<Link>` component and the `useRouter` hook.\n\n## Prefetch with `<Link>`\n\n```tsx\n<Link \n  prefetch={true} \n  href={`/items/${item.slug}`}>\n  View Item\n</Link>\n```\n\nSetting `prefetch={true}` forces Next.js to load the entire route, including its data, in the background when the `<Link>` component becomes visible. This applies to both **static** and **dynamic** routes, ensuring fast client-side navigation regardless of route type.\n\nBy default:\n\n- The `<Link>` components **automatically prefetch static routes** when visible in the viewport.\n- For **dynamic routes**, prefetching is more selective. Only parts of the route (down to any defined `loading.ts` boundaries) will load. This conserves resources by limiting data fetching to essential segments only.\n\nFor maximum speed, consider setting `prefetch={true}` explicitly, which forces full prefetching for both static and dynamic routes.\n\nMore about prefetching with `<Link>` component can be read [here](https://nextjs.org/docs/app/api-reference/components/link#prefetch)\n\n## Prefetch with `useRouter` Hook\n\n```tsx\nconst router = useRouter()\nrouter.prefetch(`/items/${item.slug}`)\n```\n\nTo prefetch routes programmatically, use the `useRouter` hook and call `router.prefetch(href: string)`. This allows prefetching to be triggered in response to user actions or other events in your application, providing more control over when routes are preloaded.\n\nYou can learn more about `useRouter` [here](https://nextjs.org/docs/app/api-reference/functions/use-router).\n\n## Good to Know\n\n- Prefetching is only enabled in **production** builds, so it won’t work during development.\n"
+  },
+  {
+    "id": "Nextjs - React Strict Mode in Nextjs.md",
+    "title": "React Strict Mode in Next.js",
+    "slug": "react-strict-mode-in-nextjs",
+    "excerpt": "Use `reactStrictMode` in Next.js to catch bugs early; avoid disabling for better development insights.",
+    "tags": ["React", "Nextjs"],
+    "createdAt": "2024-11-12T20:13:39.778Z",
+    "updatedAt": "2024-11-12T20:13:39.778Z",
+    "content": "\n# React Strict Mode in Next.js\n\n## What is React Strict Mode?\n\n- `reactStrictMode` is a development-only feature enabled by default in Next.js 13.5.1 and later with the `app` router.\n- Its purpose is to help you find bugs by highlighting potential issues while developing.\n- It re-runs components and logs warnings for risky code patterns.\n\n## Should I Disable reactStrictMode?\n\nYou should not disable `reactStrictMode`. If you encounter issues or unusual behavior, it indicates areas where your code can be improved.\n\n## How Do I Disable reactStrictMode?\n\nIf you absolutely need to disable `reactStrictMode` (not recommended), update your next.config:\n\n```ts\nmodule.exports = {\n  reactStrictMode: false,\n}\n```\n\n## References\n\n- [Next.js Docs: reactStrictMode](https://nextjs.org/docs/app/api-reference/next-config-js/reactStrictMode)\n"
+  },
+  {
+    "id": "Nextjs - What are the best techniques to improve nextjs performance.md",
+    "title": "What Are the Best Techniques to Improve Next.js Performance?",
+    "slug": "what-are-the-best-techniques-to-improve-nextjs-performance",
+    "excerpt": "Enhance Next.js performance with prefetching, caching, database optimization, PPR, and image strategies.",
+    "tags": ["React", "Nextjs", "Optimization"],
+    "createdAt": "2024-11-12T20:13:39.591Z",
+    "updatedAt": "2024-11-12T20:13:39.591Z",
+    "content": "\n# What Are the Best Techniques to Improve Next.js Performance?\n\nA deep dive into techniques to optimize Next.js applications for speed.\n\n## Advanced Prefetching\n\nPrefetching loads data as users navigate, enhancing speed and responsiveness. For image prefetching, we can use a custom `Link` component that starts loading images when hovered:\n\n### Custom Link Component\n\nThis custom component enables image prefetching on hover, preloading resources only when the cursor is likely to click.\n\nYou can find a great example for how that can be done [here](https://github.com/ethanniser/NextFaster/blob/main/src/components/ui/link.tsx)in the NextFaster project.\n\nWith this custom `Link` component, images are immediately fetched when you hover over the link, but also cancelled if you leave it before it is done loading. This limits redundant loading and ensures images appear quickly on navigation. If you worry about massive API calls to the backend, you can even add some ms delay to it, so that you will have to hover over it for 40-60 ms or so before it begins prefetching.\n\n### The Cost: Network Load\n\nAs with anything, high performance comes with a cost. In this case, it will result into higher infrastructure load due to extra network requests, especially if many images or resources are prefetched. Prefetching too aggressively can strain servers, or in some cases, exceed API rate limits.\n\n**Learn More about prefetching in Next.js**: [Nextjs - Prefetching Routes in Next.js](<./Nextjs - Prefetching Routes in Next.js.md>)\n\n## Caching\n\nCaching helps avoid repeated database queries and reduce heavy computations by storing results, improving response times and scalability.\n\n### \"use cache\" And unstable_cache\n\nThe `\"use cache\"` and `unstable_cache` utilities in Next.js 15 can cache resource-heavy logic, refreshing data only as needed.\n\n```tsx\nexport const getItemDetails = unstable_cache(\n\tasync (itemSlug) => db.query.items.findMany({\n\t\twhere: { slug: itemSlug },\n\t}),\n\t[\"item\"],\n\t{ revalidate: 7200 } // 2 hours\n);\n```\n\nWith Next.js 15 you can annotate with `\"use cache\"` on the top of a file to make cached. This is the new and recommended way of caching logic, rather than using the `unstable_cache`.\n\n### The Cost: Complexity\n\nCaching may serve stale data, especially when revalidation intervals are lengthy. Tracking cache dependencies becomes necessary, especially for lists or related resources. Revalidation, particularly for dynamic or real-time data, may require additional logic to maintain consistency.\n\n## Reducing Database Complexity\n\nFor high efficiency, design your database to avoid complex joins and repetitive calls. Structure data for rapid access—store frequently referenced fields directly in tables instead of joining on every query.\n\n**Example**: Instead of querying a `category` table each time you retrieve blog posts, add a `categoryID` directly inside the `blog-posts` table to eliminate the need for a join. This reduces load and improves query speeds.\n\n### The Cost: Ironically Enough, is Complexity\n\nThis might increase data redundancy, as related information may need to be manually updated across multiple tables. This may complicate database migrations and simply add further complexity.\n\n## Partial Pre-Rendering (PPR)\n\nPartial Pre-Rendering (PPR) is an experimental Next.js 15 feature that renders static parts of a page immediately, while deferring dynamic parts.\n\n### next.config.ts Setup\n\nTo enable the experimental PPR, activate it in your `next.config.ts` file:\n\n```tsx\nconst nextConfig = {\n  experimental: { ppr: true },\n};\n```\n\nWrap the dynamic sections of your components in `<Suspense>`-tags to indicate which parts are pre-rendered and which to load dynamically.\n\n### The Cost: Bugs\n\nSince this is experimental, it may have some unexpected bugs.\n\n## Image Optimizations\n\nNext.js `Image` component offers built-in optimizations, such as lazy loading and responsive resizing, to load images efficiently. For more info, see [Nextjs - Optimize Image Loading in Next.js](<./Nextjs - Optimize Image Loading in Next.js.md>).\n\n### The Cost: Requires Testing\n\nRequires you to manually configure each image source. Not all images may be suited to the default Next.js `Image` component. Might get unexpected results when loading images from external sources.\n\n## References\n\n- [NextFaster on GitHub](https://github.com/ethanniser/NextFaster)\n- [My Favorite Open-Source Next.js Project for 2024](https://www.youtube.com/watch?v=7bfTpZxRGto) by Josh tried coding\n- [The fastest website ever?](https://www.youtube.com/watch?v=fWfIf7Vfjec) by Theo - t3.gg\n"
+  },
+  {
+    "id": "React Query - Client Side Only React Query and use client.md",
+    "title": "Client-Side Only: React Query and \"use client\"",
+    "slug": "client-side-only-react-query-and-use-client",
+    "excerpt": "React Query requires `\"use client\"` in Next.js Client Components for client-side caching and updates.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.574Z",
+    "updatedAt": "2024-11-12T20:13:39.574Z",
+    "content": "\n# Client-Side Only: React Query and \"use client\"\n\nReact Query operates entirely on the client side, so it requires components to include `\"use client\";` at the top. This is necessary because React Query uses client-side JavaScript for caching, background updates, and other features.\n\nIn Next.js 13 and above, where server and client components are distinguished, note that:\n\n- **Client Component Requirement**: React Query only works in Client Components due to its dependency on client-side state and lifecycle hooks.\n- **Combining Server and Client Data Fetching**: Fetch initial data server-side, then use React Query in a Client Component for further caching and updates.\n\nThis setup ensures compatibility with Next.js’s architecture and enables React Query’s caching features.\n"
+  },
+  {
+    "id": "React Query - Core Concepts of React Query.md",
+    "title": "Core Concepts of React Query",
+    "slug": "core-concepts-of-react-query",
+    "excerpt": "React Query: Caching, garbage collection, stale-while-revalidate, paginated queries, and mutations.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.613Z",
+    "updatedAt": "2024-11-12T20:13:39.613Z",
+    "content": "\n# Core Concepts of React Query\n\n1. **Caching**: Stores fetched data locally, reducing network requests.\n2. **Automatic Garbage Collection**: Removes unused data based on configuration.\n3. **Stale-While-Revalidate**: Automatically refetches stale data in the background.\n4. **Paginated and Infinite Queries**: Supports paginated data and infinite scrolls.\n5. **Mutations**: Allows data changes on the server with automatic client cache updates.\n"
+  },
+  {
+    "id": "React Query - Difference Between Tanstack react--query and react-query.md",
+    "title": "Difference between @tanstack/react-query and \"react-query\"",
+    "slug": "difference-between-tanstack-react-query-and-react-query",
+    "excerpt": "`@tanstack/react-query` (v4+) replaces `react-query` (v3) as the updated package by the same developers.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.614Z",
+    "updatedAt": "2024-11-12T20:13:39.614Z",
+    "content": "\n# Difference between @tanstack/react-query and \"react-query\"\n\n- Same library, different versions: Both are made by the same devs.\n- `react-query` is the original package name, used up to version 3.\n- `@tanstack/react-query` is the updated package name, starting with version 4.\n\n## References\n\n- [StackOverflow: What is the difference between tanstack react query and react query](https://stackoverflow.com/questions/73664195/what-is-difference-between-tanstack-react-query-and-react-query)\n"
+  },
+  {
+    "id": "React Query - Global Caching and Initial Data Patterns in React Query.md",
+    "title": "Global Caching and Initial Data Patterns in React Query",
+    "slug": "global-caching-and-initial-data-patterns-in-react-query",
+    "excerpt": "Use server-side prefetching, `QueryClientProvider`, and `Hydrate` in React Query for global caching.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.640Z",
+    "updatedAt": "2024-11-12T20:13:39.640Z",
+    "content": "\n# Global Caching and Initial Data Patterns in React Query\n\nTo optimize performance across your app:\n\n1. **Prefetch Data Server-Side**: Fetch the data on the server in a high-level component (e.g., root layout) and pass it as `initialData` to React Query.\n2. **Global Access with `QueryClientProvider`**: Use React Query’s `QueryClientProvider` and `Hydrate` to set up a shared cache for the entire app.\n3. **Unified Data Access and Mutability**: With React Query’s cache, components using the same query key can access and mutate data without additional fetches.\n\nThis setup allows for efficient global caching, avoids repeated data fetching, and supports flexible mutability for shared data.\n"
+  },
+  {
+    "id": "React Query - Key Terminology in React Query.md",
+    "title": "Key Terminology in React Query",
+    "slug": "key-terminology-in-react-query",
+    "excerpt": "React Query terms: Queries, mutations, query keys, stale time, and cache time for efficient data management.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.655Z",
+    "updatedAt": "2024-11-12T20:13:39.655Z",
+    "content": "\n# Key Terminology in React Query\n\nTo maximize React Query’s potential, it’s important to understand these *key concepts*:\n\n- **Queries**: Functions that fetch data and manage it in the background.\n- **Mutations**: Actions that modify server data and keep the client cache updated.\n- **Query Keys**: Unique identifiers that manage caching for specific queries.\n- **Stale Time and Cache Time**: Control data freshness and cache expiration.\n\nThese concepts help optimize data fetching and management across diverse use cases.\n"
+  },
+  {
+    "id": "React Query - React Query Common Patterns and Best Practices.md",
+    "title": "React Query Common Patterns and Best Practices",
+    "slug": "react-query-common-patterns-and-best-practices",
+    "excerpt": "Best practices: Plan query keys, set stale/cache times, use background refetching, and integrate state management.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.675Z",
+    "updatedAt": "2024-11-12T20:13:39.675Z",
+    "content": "\n# React Query Common Patterns and Best Practices\n\nTips for effective React Query use:\n\n- **Use Query Keys Carefully**: Plan keys for efficient caching and data management.\n- **Configure Stale and Cache Times**: Balance freshness and performance with suitable stale and cache settings.\n- **Optimize for Performance**: Use background refetching and pagination capabilities to limit server requests.\n- **Combine with State Management Libraries**: For apps with both local and server state needs, consider combining React Query with libraries like Zustand or Redux.\n"
+  },
+  {
+    "id": "React Query - React Query vs Traditional Data Fetching.md",
+    "title": "React Query vs. Traditional Data Fetching",
+    "slug": "react-query-vs-traditional-data-fetching",
+    "excerpt": "React Query streamlines async state management, reducing manual code compared to traditional data fetching.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.779Z",
+    "updatedAt": "2024-11-12T20:13:39.779Z",
+    "content": "\n# React Query vs. Traditional Data Fetching\n\n**Traditional Approach**: Requires manually handling fetching, loading states, and cache management, often leading to verbose code.\n\n**React Query**: Provides an out-of-the-box solution for *async state management*, minimizing manual code and improving efficiency with a clean API.\n"
+  },
+  {
+    "id": "React Query - When Not to use React Query.md",
+    "title": "When Not to Use React Query",
+    "slug": "when-not-to-use-react-query",
+    "excerpt": "Skip React Query if your app has minimal async data needs or mainly manages local/UI state.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.689Z",
+    "updatedAt": "2024-11-12T20:13:39.689Z",
+    "content": "\n# When Not to Use React Query\n\nReact Query might not be necessary if:\n\n- Your app has minimal asynchronous data needs.\n- You’re primarily managing local/UI state.\n- Basic `useEffect` + `fetch` meet your needs.\n- You don’t need advanced caching or refetching.\n\nFor simple state requirements, React Query may add unnecessary complexity.\n"
+  },
+  {
+    "id": "React Query - When to use React Query.md",
+    "title": "When to Use React Query",
+    "slug": "when-to-use-react-query",
+    "excerpt": "Use React Query for managing complex server-state, real-time data, and easy caching/refetching in React apps.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.709Z",
+    "updatedAt": "2024-11-12T20:13:39.709Z",
+    "content": "\n# When to Use React Query\n\nConsider React Query when:\n\n- Managing server-state data in your React app.\n- Working with real-time or frequently updated data.\n- Simplifying handling of async errors and loading states.\n- Looking for easy-to-configure caching, refetching, and data synchronization.\n\nReact Query is best for applications with complex server-state needs and frequent data updates.\n"
+  },
+  {
+    "id": "React Query - Why use React Query.md",
+    "title": "Why Use React Query?",
+    "slug": "why-use-react-query",
+    "excerpt": "React Query offers client-side caching, background refetching, error/loading states, and race condition handling.",
+    "tags": ["React", "react-query"],
+    "createdAt": "2024-11-12T20:13:39.773Z",
+    "updatedAt": "2024-11-12T20:13:39.773Z",
+    "content": "\n# Why Use React Query?\n\nReact Query provides many benefits for data-heavy applications that require efficient server-state management:\n\n- **Data Caching**: Caches data on the client side, allowing instant access without redundant server requests.\n- **Automatic Background Refetching**: Keeps data up-to-date automatically.\n- **Built-in Error and Loading States**: Simplifies error handling and loading UI.\n- **Avoiding Race Conditions**: Queues requests to avoid displaying outdated or incorrect data.\n- **Fine-grained Data Invalidation**: Control over when data is considered “stale” and should be refetched.\n\nReact Query is ideal if your app frequently fetches data that needs to stay fresh and up-to-date.\n"
+  },
+  {
+    "id": "Single Ticket Limit at Conventions.md",
+    "title": "Single Ticket Limit at Conventions",
+    "slug": "single-ticket-limit-at-conventions",
+    "excerpt": "Single-ticket limits at conventions ensure fair access, scalping deterrence, and streamlined ID checks.",
+    "tags": ["Conventions", "Policy", "Research"],
+    "createdAt": "2024-11-12T20:13:39.710Z",
+    "updatedAt": "2024-11-12T20:13:39.710Z",
+    "content": "\n# Single Ticket Limit at Conventions\n\n### Overview\n\nMost conventions sell only one ticket per person. This has been the norm, as most attendees buy tickets individually rather than as couples or with a friend. But some (me) wonder if allowing pairs to book two tickets could improve the experience for those attending with a partner or friend, without negatively affecting those that only book for themselves.\n\nBelow are the main arguments for and against allowing two tickets per person, as well as potential actions to address concerns if a change were considered.\n\n### Arguments for One Ticket per Person\n\n- **Fair Access:** With single-ticket sales, everyone has an equal chance to buy a ticket. This avoids situations where pairs secure multiple tickets, which could reduce availability for others.\n- **Scalping Deterrent:** Limiting to one ticket per person makes it harder for scalpers to buy in bulk and resell for profit.\n- **Simplifies ID Checks:** Ensures that each ticket is directly tied to a single attendee, making it easier to verify identities at the event.\n- **Easier Administration:** Managing registration is simpler and faster when each attendee buys their own ticket, reducing technical complexities.\n\n### Arguments for Allowing Two Tickets\n\n- **Convenience for Pairs:** Couples or close friends attending together could book tickets more easily, reducing the chance one misses out if they need to book separately.\n- **Enhanced Experience for Pairs:** Booking as a pair avoids the hassle of making two separate purchases, creating a smoother process for those planning to attend together.\n\n### Concerns with Allowing Two Tickets\n\n- **Increased Scalping Risk:** Allowing two tickets per booking could make it easier for scalpers to acquire multiple tickets.\n- **Administrative Complexity:** Registering multiple attendees under one booking requires collecting additional information, potentially slowing the registration process.\n- **Fairness for Solo Attendees:** Permitting pairs to book tickets may slightly reduce chances for solo attendees or others who prefer to book individually.\n\n### Potential Actions to Address Concerns with Allowing Two Tickets\n\n- **Additional Identity Verification:** Require information (like ID) for both attendees in a two-ticket booking to prevent resale or misuse.\n- **Limit Transfers or Refunds for Second Ticket:** Reduce the likelihood of scalping by restricting transfer and refund options.\n\n### Conclusion\n\nCurrently, **a single-ticket limit** seems best for fair access and simplicity, with fewer administrative and security concerns. However, addressing the concerns noted above *could* make a two-ticket option feasible in the future.\n"
+  },
+  {
+    "id": "Yarn - Yarn Install Does not Create node_modules Folder.md",
+    "title": "Yarn Install Does not Create node_modules Folder",
+    "slug": "yarn-install-does-not-create-node_modules-folder",
+    "excerpt": "Yarn no longer creates `node_modules` by default; set `nodeLinker: node-modules` in `.yarnrc.yml`.",
+    "tags": ["Yarn"],
+    "createdAt": "2024-11-12T20:13:39.818Z",
+    "updatedAt": "2024-11-12T20:13:39.818Z",
+    "content": "\n# Yarn Install Does not Create node_modules Folder\n\nIn recent versions of Yarn, the `node_modules` folder isn't created by default. To enable this, configure Yarn with a `.yarnrc.yml` file.\n\n- Create `.yarnrc.yml` at the root of your project.\n2. Add the following configuration:\n\n```yml\nnodeLinker: node-modules\n```\n\n## References\n\n- [node_modules is missing after successful yarn install](https://github.com/yarnpkg/yarn/issues/5500#issuecomment-1221456246)\n"
+  }
+]

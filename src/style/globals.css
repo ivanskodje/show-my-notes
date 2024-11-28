@@ -1,0 +1,326 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --font-heading: "Poppins", sans-serif;
+  font-size: 120%;
+}
+
+.light {
+  --bg-color: 0 0% 98%;
+  --text-color: 0 0% 0%; /* #000000 */
+  --accent-color: 210 100% 40%; /* #0066cc */
+  --secondary-color: 280 38% 63%; /* #a875c1 */
+  --code-block-bg: 0 0% 75%; /* #f2f2f2 */
+  --subtitle-color: 0 0% 33%; /* #555555 */
+  --border-color: 0 0% 80%; /* #cccccc */
+  --destructive-color: 354 68% 60%; /* #d9534f */
+  --success-color: 134 61% 47%; /* #28a745 */
+  --info-color: 188 72% 47%; /* #17a2b8 */
+  --warning-color: 48 60% 50%;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.dark {
+  --bg-color: 270 20% 15%; /* #21192b */
+  --text-color: 0 0% 100%; /* #ffffff */
+  --accent-color: 280 38% 63%; /* #a875c1 */
+  --secondary-color: 210 100% 40%; /* #0066cc */
+  --code-block-bg: 323 26% 23%; /* #462d47 */
+  --subtitle-color: 276 16% 60%; /* #9180a3 */
+  --border-color: 276 16% 60%; /* #9180a3 */
+  --destructive-color: 0 100% 70%; /* #ff5f5f */
+  --success-color: 134 94% 64%; /* #50fa7b */
+  --info-color: 191 94% 79%; /* #8be9fd */
+  --warning-color: 48 94% 64%;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+main,
+nav {
+  @apply max-w-6xl mx-auto my-12 px-4;
+}
+
+h1 {
+  line-height: 1.2;
+  @apply scroll-m-20 font-extrabold tracking-tight text-4xl lg:text-5xl mb-8 mt-16;
+}
+
+h2 {
+  line-height: 1.3;
+  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 mb-8 mt-16;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  @apply mb-6 mt-16;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  @apply mb-6 mt-16;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  @apply mb-6 mt-16;
+}
+
+h6 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.6;
+  @apply mb-6 mt-16;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: hsl(var(--accent-color));
+  overflow-wrap: break-word;
+  word-break: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+p,
+a,
+li,
+blockquote,
+code,
+select,
+textarea,
+input,
+button {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+p {
+  @apply my-6;
+}
+
+a {
+  color: var(--accent-color);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+blockquote {
+  font-family: var(--font-mono);
+  color: var(--text-color);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  border-left: 4px solid hsl(var(--accent-color));
+  @apply bg-accent/10 my-6;
+}
+
+.subtitle {
+  color: hsl(var(--subtitle-color));
+  font-size: 1rem;
+}
+
+hr {
+  border-color: hsl(var(--subtitle-color));
+  margin: 2rem 0;
+}
+
+select,
+textarea,
+input,
+button {
+  font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+}
+
+.markdown-content {
+  li code {
+    @apply bg-accent/10 text-accent-foreground font-mono px-1;
+  }
+
+  code {
+    font-size: inherit;
+  }
+
+  p code {
+    @apply bg-accent/10 text-accent-foreground font-mono px-1;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 2.5em;
+    margin-top: 1em;
+  }
+
+  ul li {
+    margin-bottom: 0.8em;
+    line-height: 1.6;
+    @apply pb-1;
+  }
+
+  ol {
+    list-style-type: disc;
+    padding-left: 2.5em;
+    margin-top: 1em;
+  }
+
+  ol li {
+    margin-bottom: 0.8em;
+    line-height: 1.6;
+  }
+
+  ol li strong {
+    font-weight: bold;
+  }
+
+  blockquote blockquote {
+    margin-left: 1.5rem;
+    border-left: 4px solid hsl(var(--secondary-color));
+    padding-left: 1rem;
+  }
+
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 1rem;
+    @apply text-accent-foreground bg-accent/10 my-6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  th,
+  td {
+    border: 1px solid hsl(var(--border-color));
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  th {
+    background-color: hsl(var(--accent-color) / 0.1);
+    font-weight: 600;
+    color: hsl(var(--accent-color));
+  }
+
+  tr:nth-child(even) {
+    background-color: hsl(var(--secondary-color) / 0.05);
+  }
+
+  tr:hover {
+    background-color: hsl(var(--accent-color) / 0.1);
+  }
+
+  td {
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+
+  table caption {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: hsl(var(--subtitle-color));
+  }
+
+  .info-block,
+  .warning-block,
+  .error-block,
+  .success-block {
+    @apply p-4 rounded-md text-base leading-relaxed my-6 space-y-6;
+  }
+
+  /* Info block */
+  .info-block {
+    background-color: hsl(var(--info-color) / 0.1);
+    border-left: 4px solid hsl(var(--info-color));
+    color: hsl(var(--info-color));
+  }
+
+  /* Warning block */
+  .warning-block {
+    background-color: hsl(var(--warning-color) / 0.1);
+    border-left: 4px solid hsl(var(--warning-color));
+    color: hsl(var(--warning-color));
+  }
+
+  /* Error block */
+  .error-block {
+    background-color: hsl(var(--destructive-color) / 0.1);
+    border-left: 4px solid hsl(var(--destructive-color));
+    color: hsl(var(--destructive-color));
+  }
+
+  /* Success block */
+  .success-block {
+    background-color: hsl(var(--success-color) / 0.1);
+    border-left: 4px solid hsl(var(--success-color));
+    color: hsl(var(--success-color));
+  }
+}
+
+@media print {
+  body {
+    font-size: 8pt;
+  }
+}
+
+@layer base {
+  :root,
+  .light,
+  .dark {
+    --background: var(--bg-color);
+    --foreground: var(--text-color);
+    --card: var(--bg-color);
+    --card-foreground: var(--text-color);
+    --popover: var(--bg-color);
+    --popover-foreground: var(--text-color);
+    --primary: var(--accent-color);
+    --primary-foreground: var(--text-color);
+    --secondary: var(--secondary-color);
+    --secondary-foreground: var(--text-color);
+    --muted: var(--subtitle-color);
+    --muted-foreground: var(--subtitle-color);
+    --accent: var(--accent-color);
+    --accent-foreground: var(--text-color);
+    --destructive: var(--destructive-color);
+    --destructive-foreground: var(--text-color);
+    --border: var(--border-color);
+    --input: var(--bg-color);
+    --ring: var(--accent-color);
+    --success: var(--success-color);
+    --info: var(--info-color);
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
