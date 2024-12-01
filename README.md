@@ -94,6 +94,13 @@ yarn dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
+
+## Getting notified about Note changes
+
+I have created a GitHub Actions workflow that will automatically detect changes to your notes and send a request to the server to update the notes. This [workflow](/docs/workflow-example.yml) is located in the `/docs` folder and is named `workflow-for-note-repo.yml`.
+
+It will automatically detect changes to your notes and send a request to the server to update the notes. This workflow is triggered when a push is made to the `master` branch, and it will only process changes to files in the public notes folder you specify.
+
 ## Contributing
 
 Contributions are welcome!

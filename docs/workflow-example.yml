@@ -1,0 +1,136 @@
+name: Update Notes
+
+env:
+  BASE_BRANCH: master  
+  REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}  
+  BASE_URL: ${{ vars.BASE_URL }}  
+  WEBHOOK_URI: "/api/revalidate-note" # our endpoint
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "Public Notes/**"  # CHANGE THIS TO YOUR PUBLIC NOTES FOLDER
+
+jobs:
+  revalidate:
+    name: Update Changed Notes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  
+          ref: ${{ env.BASE_BRANCH }}
+
+      - name: Detect Changed and Deleted Files
+        id: detect_files
+        run: |
+          # Fetch the latest commit history
+          git fetch origin ${{ env.BASE_BRANCH }}
+
+          # Identify changed files (Added/Modified) only within the tracked folder
+          CHANGED_FILES=$(git diff --name-only --diff-filter=AMR ${{ env.BASE_BRANCH }}~ ${{ env.BASE_BRANCH }} -- '*.md')
+
+          # Identify deleted files (files no longer in the tracked folder)
+          DELETED_FILES=$(git diff --name-only --diff-filter=D ${{ env.BASE_BRANCH }}~ ${{ env.BASE_BRANCH }} -- '*.md')
+
+          # Debugging logs in case something goes wrong
+          echo "Detected Changed Files:"
+          echo "$CHANGED_FILES"
+          echo "Detected Deleted Files:"
+          echo "$DELETED_FILES"
+
+          # Convert file lists to JSON arrays for safe handling
+          changed_files_json=$(printf '%s\n' "$CHANGED_FILES" | jq -R -s -c 'split("\n") | map(select(. != ""))')
+          deleted_files_json=$(printf '%s\n' "$DELETED_FILES" | jq -R -s -c 'split("\n") | map(select(. != ""))')
+
+          # Export results as environment variables
+          echo "changed_files=$changed_files_json" >> $GITHUB_ENV
+          echo "deleted_files=$deleted_files_json" >> $GITHUB_ENV
+
+      - name: Process Notes
+        id: process_notes
+        run: |
+          NOTE_EVENTS=()
+
+          # Parse JSON arrays back into bash arrays
+          mapfile -t CHANGED_FILES <<< "$(echo '${{ env.changed_files }}' | jq -r '.[]')"
+          mapfile -t DELETED_FILES <<< "$(echo '${{ env.deleted_files }}' | jq -r '.[]')"
+
+          echo "Processing Changed Files:"
+          for file in "${CHANGED_FILES[@]}"; do
+            if [ -z "$file" ]; then
+              echo "Skipping empty file entry"
+              continue
+            fi
+
+            if [ -f "$file" ]; then
+              # Extract 'id' and ensure no extra quotes are added
+              id=$(grep -oP '^id:\s*\K.*' "$file" | tr -d '"')
+              new_title=$(grep -oP '^title:\s*\K.*' "$file" | tr -d '"')
+              old_title=""
+
+              # Check for the old version of the file in the previous commit
+              old_file_content=$(git show ${{ env.BASE_BRANCH }}~:"$file" 2>/dev/null || echo "")
+              if [ -n "$old_file_content" ]; then
+                old_title=$(echo "$old_file_content" | grep -oP '^title:\s*\K.*' | tr -d '"')
+              fi
+
+              if [ -n "$id" ]; then
+                if [ -n "$new_title" ] && [ -n "$old_title" ] && [ "$new_title" != "$old_title" ]; then
+                  # Add old and new title events if the title has changed
+                  NOTE_EVENTS+=("{\"id\": \"$id\", \"title\": \"$old_title\", \"type\": \"UPDATED\"}")
+                  NOTE_EVENTS+=("{\"id\": \"$id\", \"title\": \"$new_title\", \"type\": \"UPDATED\"}")
+                elif [ -n "$new_title" ]; then
+                  # Add event for unchanged or newly added title
+                  NOTE_EVENTS+=("{\"id\": \"$id\", \"title\": \"$new_title\", \"type\": \"UPDATED\"}")
+                fi
+              else
+                echo "Skipping changed file '$file': missing id"
+              fi
+            else
+              echo "Skipping missing file '$file'"
+            fi
+          done
+
+          echo "Processing Deleted Files:"
+          for file in "${DELETED_FILES[@]}"; do
+            if [ -z "$file" ]; then
+              echo "Skipping empty file entry"
+              continue
+            fi
+
+            file_content=$(git show ${{ env.BASE_BRANCH }}~:"$file" 2>/dev/null || echo "")
+            if [ -n "$file_content" ]; then
+              # Extract 'id' and 'title' without adding extra quotes
+              id=$(echo "$file_content" | grep -oP '^id:\s*\K.*' | tr -d '"')
+              title=$(echo "$file_content" | grep -oP '^title:\s*\K.*' | tr -d '"')
+              if [ -n "$id" ] && [ -n "$title" ]; then
+                NOTE_EVENTS+=("{\"id\": \"$id\", \"title\": \"$title\", \"type\": \"DELETED\"}")
+              else
+                echo "Skipping deleted file '$file': missing id or title"
+              fi
+            else
+              echo "Skipping file '$file': content could not be retrieved"
+            fi
+          done
+
+          # Convert note events array to JSON
+          note_events_json=$(printf '%s\n' "${NOTE_EVENTS[@]}" | jq -R -s -c 'split("\n") | map(select(. != "")) | map(fromjson)')
+
+          # Output the JSON for further steps
+          echo "Note Events JSON: $note_events_json"
+          echo "note_events=$note_events_json" >> $GITHUB_ENV
+
+      - name: Send Update Request
+        env:
+          BASE_URL: ${{ env.BASE_URL }}
+          REVALIDATE_SECRET: ${{ env.REVALIDATE_SECRET }}
+          NOTE_EVENTS: ${{ env.note_events }}
+        run: |
+          curl -X POST "$BASE_URL${{ env.WEBHOOK_URI }}?secret=$REVALIDATE_SECRET" \
+            -H "Content-Type: application/json" \
+            -d "{\"note_events\": $NOTE_EVENTS}"
