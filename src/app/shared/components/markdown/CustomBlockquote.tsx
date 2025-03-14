@@ -5,6 +5,14 @@ type CustomBlockquoteProps = {
   children: React.ReactNode;
 };
 
+const titleMap: Record<string, { defaultTitle: string; Icon: React.FC; className: string }> = {
+  info: { defaultTitle: "Info", Icon: Info, className: "info-block" },
+  tip: { defaultTitle: "Tip", Icon: Sparkles, className: "tip-block" },
+  warning: { defaultTitle: "Warning", Icon: AlertTriangle, className: "warning-block" },
+  error: { defaultTitle: "Error", Icon: XCircle, className: "error-block" },
+  success: { defaultTitle: "Success", Icon: CheckCircle, className: "success-block" },
+};
+
 const CustomBlockquote: React.FC<CustomBlockquoteProps> = ({ children }) => {
   const paragraphElement = React.Children.toArray(children).find(
     (child) => React.isValidElement(child) && child.type === "p"
@@ -34,14 +42,6 @@ const CustomBlockquote: React.FC<CustomBlockquoteProps> = ({ children }) => {
     customTitle: string | undefined,
     remainingContent: React.ReactNode
   ) => {
-    const titleMap: Record<string, { defaultTitle: string; Icon: React.FC; className: string }> = {
-      info: { defaultTitle: "Info", Icon: Info, className: "info-block" },
-      tip: { defaultTitle: "Tip", Icon: Sparkles, className: "tip-block" },
-      warning: { defaultTitle: "Warning", Icon: AlertTriangle, className: "warning-block" },
-      error: { defaultTitle: "Error", Icon: XCircle, className: "error-block" },
-      success: { defaultTitle: "Success", Icon: CheckCircle, className: "success-block" },
-    };
-
     const blockType = titleMap[type];
     if (!blockType) return <blockquote>{children}</blockquote>;
 
