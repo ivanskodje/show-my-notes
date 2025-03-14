@@ -28,6 +28,9 @@ Supports annotated comments:
 > [!info]
 > This is an info block
 
+> [!tip]
+> This is a tip block
+
 > [!warning]
 > This is a warning block
 
@@ -45,6 +48,9 @@ Supports annotated comments with custom titles:
 ```markdown
 > [!info] Custom Title
 > This is an info block
+
+> [!tip] Custom Tip Title
+> This is a tip block
 
 > [!warning] Custom Warning Title
 > This is a warning block
@@ -93,7 +99,6 @@ yarn dev
 ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
-
 
 ## Getting notified about Note changes
 

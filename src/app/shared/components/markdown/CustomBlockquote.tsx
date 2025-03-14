@@ -1,4 +1,4 @@
-import { Info, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
+import { Info, AlertTriangle, CheckCircle, XCircle, Sparkles } from "lucide-react";
 import React from "react";
 
 type CustomBlockquoteProps = {
@@ -36,6 +36,7 @@ const CustomBlockquote: React.FC<CustomBlockquoteProps> = ({ children }) => {
   ) => {
     const titleMap: Record<string, { defaultTitle: string; Icon: React.FC; className: string }> = {
       info: { defaultTitle: "Info", Icon: Info, className: "info-block" },
+      tip: { defaultTitle: "Tip", Icon: Sparkles, className: "tip-block" },
       warning: { defaultTitle: "Warning", Icon: AlertTriangle, className: "warning-block" },
       error: { defaultTitle: "Error", Icon: XCircle, className: "error-block" },
       success: { defaultTitle: "Success", Icon: CheckCircle, className: "success-block" },
