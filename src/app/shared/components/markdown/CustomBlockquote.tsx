@@ -1,5 +1,6 @@
 import { Info, AlertTriangle, CheckCircle, XCircle, Sparkles } from "lucide-react";
 import React from "react";
+import { splitIntoTokens, extractMarkerInfo, renderSpacedLine } from "./markdown-utils";
 
 type CustomBlockquoteProps = {
   children: React.ReactNode;
@@ -18,58 +19,36 @@ const CustomBlockquote: React.FC<CustomBlockquoteProps> = ({ children }) => {
     (child) => React.isValidElement(child) && child.type === "p"
   ) as React.ReactElement | undefined;
 
-  if (!paragraphElement) return <blockquote>{children}</blockquote>;
-
-  const content = paragraphElement.props.children;
-
-  const extractMarkerAndContent = (lines: string[] | React.ReactNode[]) => {
-    const firstLine = typeof lines[0] === "string" ? lines[0].trim() : "";
-    const remainingContent = lines.slice(1);
-
-    const regex = /^\[!(\w+)\](?:\s+(.*))?/; // Matches [!type] Optional Custom Title
-    const match = regex.exec(firstLine);
-
-    return {
-      type: match?.[1]?.toLowerCase() || null,
-      customTitle: match?.[2]?.trim(),
-      markerLine: firstLine,
-      remainingContent,
-    };
-  };
-
-  const renderBlock = (
-    type: string,
-    customTitle: string | undefined,
-    remainingContent: React.ReactNode
-  ) => {
-    const blockType = titleMap[type];
-    if (!blockType) return <blockquote>{children}</blockquote>;
-
-    const { defaultTitle, Icon, className } = blockType;
-
-    return (
-      <div className={className}>
-        <div className="flex items-center font-bold mb-2">
-          <span className="w-5 h-5 mr-2">
-            <Icon aria-hidden="true" />
-          </span>
-          {customTitle || defaultTitle}
-        </div>
-        <div>{remainingContent}</div>
-      </div>
-    );
-  };
-
-  if (typeof content === "string") {
-    const lines = content.split("\n").map((line) => line.trim());
-    const { type, customTitle, remainingContent } = extractMarkerAndContent(lines);
-    return renderBlock(type || "", customTitle, remainingContent.join("\n").trim());
-  } else if (Array.isArray(content)) {
-    const { type, customTitle, remainingContent } = extractMarkerAndContent(content);
-    return renderBlock(type || "", customTitle, remainingContent);
+  if (!paragraphElement) {
+    return <blockquote>{children}</blockquote>;
   }
 
-  return <blockquote>{children}</blockquote>;
+  const content = paragraphElement.props.children;
+  const tokens = Array.isArray(content) ? splitIntoTokens(content) : splitIntoTokens([content]);
+  const { foundMarker, type, customTitle, rest } = extractMarkerInfo(tokens);
+
+  if (!foundMarker) {
+    return <blockquote>{children}</blockquote>;
+  }
+
+  const blockType = titleMap[type];
+  if (!blockType) {
+    return <blockquote>{children}</blockquote>;
+  }
+
+  const { defaultTitle, Icon, className } = blockType;
+
+  return (
+    <div className={className}>
+      <div className="flex items-center font-bold mb-2">
+        <span className="w-5 h-5 mr-2">
+          <Icon aria-hidden="true" />
+        </span>
+        {customTitle.length ? renderSpacedLine(customTitle) : defaultTitle}
+      </div>
+      <div style={{ whiteSpace: "pre-wrap" }}>{renderSpacedLine(rest)}</div>
+    </div>
+  );
 };
 
 export default CustomBlockquote;
