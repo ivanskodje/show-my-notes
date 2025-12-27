@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # Place Arguments that should be passed at build time here!
 #  (WARNING: ENVs will be baked in, so use carefully)
@@ -64,7 +64,7 @@ WORKDIR /app
 
 RUN apk add --no-cache git
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 RUN mkdir -p /app/data && chown -R 1001:1001 /app/data
 
@@ -84,8 +84,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
 EXPOSE 3000
 
